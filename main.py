@@ -42,7 +42,7 @@ with st.container():
     gender = st.selectbox("Gender:", ["Select", "Male", "Female", "Other"])
     state = st.text_input("State:", placeholder="Enter your state")
     city = st.text_input("City:", placeholder="Enter your city")
-    user_message = st.text_input(''.join([name, dob, time, gender, state, city, "generate horoscope."])")
+    user_message = st.text_input(''.join([name, dob, time, gender, state, city, "generate horoscope."]))
 
 # Button and response container
 if st.button("Send"):
