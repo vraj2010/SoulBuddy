@@ -4,8 +4,8 @@ import requests
 # Constants
 BASE_API_URL = "https://api.langflow.astra.datastax.com"
 LANGFLOW_ID = "badb4656-66c0-45f4-b943-79abcbb3ec30"
-APPLICATION_TOKEN = "AstraCS:QYowTvhJgojlwvEqtAHfCKDd:4d219a31a7dc0ffaab6ac7252ee2d5963c9aa5be6d132d994445143406d3b183"
-ENDPOINT = "fc9823c2-fab4-455e-8609-9aae131793a0?stream=false"
+APPLICATION_TOKEN = "AstraCS:ZlPZClnMTTzoiGEoIippCYEv:2f705ec78607533626f085ef4af098d9c73a423996ed72f9d2376fea63c500fe"
+ENDPOINT = "ab785155-9fc7-44a6-b1c5-c10393b2cb8f?stream=false"
 
 def run_flow(message: str) -> dict:
     """
