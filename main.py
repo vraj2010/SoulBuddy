@@ -34,11 +34,14 @@ st.title("SoulBuddy")
 st.subheader("Your personalized spiritual guide")
 st.markdown("Interact with Hackonauts to generate insights.")
 
+min_date = datetime.date(1900, 1, 1)
+max_date = datetime.date.today()
+
 # Input Section
 st.header("Enter Your Details")
 with st.form("user_inputs"):
     name = st.text_input("Name", placeholder="Enter your name")
-    dob = st.date_input("Date of Birth", min_value=1900/01/01, max_value="today")
+    dob = st.date_input("Date of Birth", min_value=min_date, max_value=max_date)
     time = st.time_input("Time", step=0:01:00)
     gender = st.selectbox("Gender", ["Select", "Male", "Female", "Other"])
     state = st.text_input("State", placeholder="Enter your state")
