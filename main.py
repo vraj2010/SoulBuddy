@@ -1,5 +1,7 @@
 import streamlit as st
 import requests
+from kerykeion import get_chart, ChartError
+from datetime import datetime
 
 # Constants
 BASE_API_URL = "https://api.langflow.astra.datastax.com"
@@ -65,6 +67,27 @@ if st.button("Send"):
                         <p style="color:#333; font-size:16px; font-family:Arial, sans-serif;">{result}</p>
                     </div>
                 """, unsafe_allow_html=True)
+                
+                # Generate the birth chart using kerykeion
+                try:
+                    # Format the input datetime
+                    birth_datetime = datetime.combine(dob, time)
+                    chart = get_chart(
+                        birth_datetime,
+                        city,
+                        state,
+                        name
+                    )
+
+                    # Display the birth chart
+                    st.subheader("Your Birth Chart")
+                    st.write(chart)  # Display the chart data as raw text or customize the visualization as needed
+
+                except ChartError as e:
+                    st.error(f"⚠️ Error in generating birth chart: {e}")
+                except Exception as e:
+                    st.error(f"⚠️ Unexpected error while generating chart: {e}")
+                    
             except requests.exceptions.RequestException as e:
                 st.error(f"⚠️ An error occurred: {e}")
             except Exception as e:
