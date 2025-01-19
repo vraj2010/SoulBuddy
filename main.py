@@ -30,9 +30,9 @@ def run_flow(message: str) -> dict:
 st.set_page_config(page_title="Hackonauts Chatbot", layout="centered")
 
 # App Title and Description
-st.title("Hackonauts Chatbot")
-st.subheader("Data-Driven Social Insights")
-st.markdown("Interact with Hackonauts to generate personalized insights.")
+st.title("SoulBuddy")
+st.subheader("Your personalized spiritual guide")
+st.markdown("Interact with Hackonauts to generate insights.")
 
 # Input Section
 st.header("Enter Your Details")
