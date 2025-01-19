@@ -42,7 +42,7 @@ st.header("Enter Your Details")
 with st.form("user_inputs"):
     name = st.text_input("Name", placeholder="Enter your name")
     dob = st.date_input("Date of Birth", min_value=min_date, max_value=max_date)
-    time = st.time_input("Time", step=0:01:00)
+    time = st.time_input("Time", step=datetime.timedelta(minutes=1))
     gender = st.selectbox("Gender", ["Select", "Male", "Female", "Other"])
     state = st.text_input("State", placeholder="Enter your state")
     city = st.text_input("City", placeholder="Enter your city")
