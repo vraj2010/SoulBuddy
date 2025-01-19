@@ -1,36 +1,11 @@
-[3:56 am, 19/1/2025] Vraj Patel: import streamlit as st
+import streamlit as st
 import requests
+import datetime
 
 # Constants
 BASE_API_URL = "https://api.langflow.astra.datastax.com"
 LANGFLOW_ID = "badb4656-66c0-45f4-b943-79abcbb3ec30"
-APPLICATION_TOKEN = "AstraCS:QYowTvhJgojlwvEqtAHfCKDd:4d219a31a7dc0ffaab6ac7252ee2d5963c9aa5be6d132d994445143406d3b183"
-ENDPOINT = "fc9823c2-fab4-455e-8609-9aae131793a0?stream=false"
-
-
-def run_flow(message: str) -> dict:
-    """
-    Call the LangFlow API to process the message.
-    """
-    api_url = f"{BASE_API_URL}/lf/{LANGFLOW_ID}/api/v1/run/{ENDPOINT}"
-    payload = {
-        "input_value": message,
-        "output_type": "chat",
-        "input_type": "chat",
-    }
-    headers = {
-        "Authorization": "Bearer " + APPLICATION_TOKEN,
-        "Content-Type": "application/json"
-    }
-
-    respons…
-[4:36 am, 19/1/2025] Vraj Patel: import streamlit as st
-import requests
-
-# Constants
-BASE_API_URL = "https://api.langflow.astra.datastax.com"
-LANGFLOW_ID = "badb4656-66c0-45f4-b943-79abcbb3ec30"
-APPLICATION_TOKEN = "AstraCS:ZlPZClnMTTzoiGEoIippCYEv:2f705ec78607533626f085ef4af098d9c73a423996ed72f9d2376fea63c500fe"
+APPLICATION_TOKEN = "AstraCS:mNZmDmZFukpoBtcosohgECRY:078cc67eb7541f1db01128ab9d21525e7a9e027b06888b3ed6fd5adca3b081ec"
 ENDPOINT = "ab785155-9fc7-44a6-b1c5-c10393b2cb8f?stream=false"
 
 def run_flow(message: str) -> dict:
@@ -58,11 +33,14 @@ st.set_page_config(page_title="Hackonauts Chatbot", layout="centered")
 st.title("Chat with Hackonauts")
 st.markdown("Data-Driven Social Insights with Langflow and DataStax Astra DB.")
 
+min_date = datetime.date(1900, 1, 1)
+max_date = datetime.date.today()
+
 # Input container
 with st.container():
     name = st.text_input("Name:", placeholder="Enter your name")
-    dob = st.date_input("Date of Birth:")
-    time = st.time_input("Time:")
+    dob = st.date_input("Date of Birth", min_value=min_date, max_value=max_date)
+    time = st.time_input("Time", step=datetime.timedelta(minutes=1))
     gender = st.selectbox("Gender:", ["Select", "Male", "Female", "Other"])
     state = st.text_input("State:", placeholder="Enter your state")
     city = st.text_input("City:", placeholder="Enter your city")
@@ -73,7 +51,7 @@ with st.container():
 # Button and response container
 if st.button("Send"):
     if not user_message.strip():
-        st.error("⚠️ Please enter a valid message.")
+        st.error("⚠ Please enter a valid message.")
     else:
         with st.spinner("Waiting for response..."):
             try:
@@ -92,6 +70,6 @@ if st.button("Send"):
                     </div>
                 """, unsafe_allow_html=True)
             except requests.exceptions.RequestException as e:
-                st.error(f"⚠️ An error occurred: {e}")
+                st.error(f"⚠ An error occurred: {e}")
             except Exception as e:
-                st.error(f"⚠️ Unexpected error: {e}")
+                st.error(f"⚠ Unexpected error: {e}")
