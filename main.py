@@ -30,8 +30,9 @@ def run_flow(message: str) -> dict:
 # Streamlit Interface
 st.set_page_config(page_title="Hackonauts Chatbot", layout="centered")
 
-st.title("Chat with Hackonauts")
-st.markdown("Data-Driven Social Insights with Langflow and DataStax Astra DB.")
+st.title("SoulBuddy")
+st.subheader("Your personalized spiritual guide")
+st.markdown("Interact with Hackonauts to generate insights.")
 
 min_date = datetime.date(1900, 1, 1)
 max_date = datetime.date.today()
@@ -49,7 +50,7 @@ with st.container():
     user_message = f"{name} {dob} {time} {gender} {state} {city} generate horoscope."
 
 # Button and response container
-if st.button("Send"):
+if st.button("Generate Horoscope"):
     if not user_message.strip():
         st.error("⚠ Please enter a valid message.")
     else:
