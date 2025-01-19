@@ -65,7 +65,7 @@ if st.button("Send"):
                 # Display the result
                 st.success("Response Received:")
                 st.markdown(f"""
-                    <div style="background-color:#f9f9f9; padding:10px; border-radius:5px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                    <div style="padding:10px; border-radius:5px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
                         <p style="color:#333; font-size:16px; font-family:Arial, sans-serif;">{result}</p>
                     </div>
                 """, unsafe_allow_html=True)
