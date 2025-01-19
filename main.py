@@ -1,10 +1,12 @@
 import streamlit as st
 import requests
+import matplotlib.pyplot as plt
+import random
 
-# Constants
+# Constants for LangFlow API
 BASE_API_URL = "https://api.langflow.astra.datastax.com"
 LANGFLOW_ID = "badb4656-66c0-45f4-b943-79abcbb3ec30"
-APPLICATION_TOKEN = "AstraCS:ZlPZClnMTTzoiGEoIippCYEv:2f705ec78607533626f085ef4af098d9c73a423996ed72f9d2376fea63c500fe"
+APPLICATION_TOKEN = "AstraCS:MBGHcCzoGHXPuPhUJAYMExEF:b4de9645f5e3e61c94cdcb6bbed7e81a4e829c403e5eded992fd3f191d32cf89"
 ENDPOINT = "ab785155-9fc7-44a6-b1c5-c10393b2cb8f?stream=false"
 
 def run_flow(message: str) -> dict:
@@ -26,17 +28,36 @@ def run_flow(message: str) -> dict:
     response.raise_for_status()
     return response.json()
 
-# Streamlit Interface
-st.set_page_config(page_title="Hackonauts Chatbot", layout="centered")
+# Birth Chart Visualization
+def generate_birth_chart(coordinates, user_name):
+    """
+    Generate a visual birth chart based on coordinates.
+    """
+    latitudes = [coord[0] for coord in coordinates]
+    longitudes = [coord[1] for coord in coordinates]
+    
+    # Create the birth chart as a scatter plot
+    plt.figure(figsize=(8, 8))
+    plt.scatter(longitudes, latitudes, c='blue', alpha=0.6, edgecolors='black')
+    plt.title(f"Birth Chart for {user_name}", fontsize=14)
+    plt.xlabel("Longitude", fontsize=12)
+    plt.ylabel("Latitude", fontsize=12)
+    plt.grid(alpha=0.4)
+    plt.axhline(0, color='black', linewidth=0.8, linestyle='--')  # Equator
+    plt.axvline(0, color='black', linewidth=0.8, linestyle='--')  # Prime Meridian
+    st.pyplot(plt)
 
-st.title("Chat with Hackonauts")
-st.markdown("Data-Driven Social Insights with Langflow and DataStax Astra DB.")
+# Streamlit Interface
+st.set_page_config(page_title="Hackonauts Chatbot and Birth Chart", layout="centered")
+
+st.title("Chat with Hackonauts & Generate Your Birth Chart")
+st.markdown("Data-Driven Social Insights with Langflow and Birth Charts.")
 
 # Input container
 with st.container():
     name = st.text_input("Name:", placeholder="Enter your name")
     dob = st.date_input("Date of Birth:")
-    time = st.time_input("Time:")
+    time = st.time_input("Time of Birth:")
     gender = st.selectbox("Gender:", ["Select", "Male", "Female", "Other"])
     state = st.text_input("State:", placeholder="Enter your state")
     city = st.text_input("City:", placeholder="Enter your city")
@@ -46,8 +67,8 @@ with st.container():
 
 # Button and response container
 if st.button("Send"):
-    if not user_message.strip():
-        st.error("⚠️ Please enter a valid message.")
+    if not name.strip() or gender == "Select":
+        st.error("⚠ Please fill in all the required fields.")
     else:
         with st.spinner("Waiting for response..."):
             try:
@@ -65,7 +86,13 @@ if st.button("Send"):
                         <p style="color:#333; font-size:16px; font-family:Arial, sans-serif;">{result}</p>
                     </div>
                 """, unsafe_allow_html=True)
+                
+                # Generate and display the birth chart
+                birth_chart_coordinates = [(random.uniform(-90, 90), random.uniform(-180, 180)) for _ in range(100)]
+                st.markdown(f"### Birth Chart for {name}")
+                generate_birth_chart(birth_chart_coordinates, name)
+
             except requests.exceptions.RequestException as e:
-                st.error(f"⚠️ An error occurred: {e}")
+                st.error(f"⚠ An error occurred: {e}")
             except Exception as e:
-                st.error(f"⚠️ Unexpected error: {e}") 
+                st.error(f"⚠ Unexpected error: {e}")
