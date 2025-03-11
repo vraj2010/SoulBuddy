@@ -43,10 +43,10 @@ The chatbot uses user-provided inputs to generate horoscopes, such as:
 ## 🖥 Screenshots
 
 ### User Input Section  
-![User Input](https://github.com/vraj2010/SoulBuddy/blob/main/templates/User_Input.jpg)
+![User Input](https://github.com/vraj2010/SoulBuddy/Input.jpg)
 
 ### Horoscope Output  
-![Horoscope Output](https://github.com/vraj2010/SoulBuddy/blob/main/templates/Horoscope_Output.jpg)
+![Horoscope Output](https://github.com/vraj2010/SoulBuddy/Output.jpg)
 
 ---
 
