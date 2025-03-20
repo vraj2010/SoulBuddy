@@ -5,7 +5,7 @@ import datetime
 # Constants
 BASE_API_URL = "https://api.langflow.astra.datastax.com"
 LANGFLOW_ID = "badb4656-66c0-45f4-b943-79abcbb3ec30"
-APPLICATION_TOKEN = "AstraCS:mNZmDmZFukpoBtcosohgECRY:078cc67eb7541f1db01128ab9d21525e7a9e027b06888b3ed6fd5adca3b081ec"
+APPLICATION_TOKEN = "AstraCS:ndZtkjnXQHyplsIOnYkbTsit:61d2c6e27a71621874a4af3d952a7c67463131bf0d2c46d90b362c504d35397c"
 ENDPOINT = "ab785155-9fc7-44a6-b1c5-c10393b2cb8f?stream=false"
 
 def run_flow(message: str) -> dict:
